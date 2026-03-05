@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NorthNest Interiors</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">NorthNest</div>
+<nav class="menu">
+  <a href="index.html">Accueil</a>
+  <a href="#">Sofas</a>
+  <a href="#">Tables</a>
+  <a href="#">Chairs</a>
+  <a href="#">Décor</a>
+</nav>
+  <div class="search">
+    <input id="searchInput" type="text" placeholder="Rechercher un produit (canapé, table, chaise...)">
+    <button id="searchBtn">Rechercher</button>
+  </div>
+
+  <a class="cart-link" href="cart.html">Panier</a>
+</header>
+
+<section class="hero">
+
+<div class="hero-content">
+<h1>NorthNest Interiors</h1>
+<p>Modern Home Furniture</p>
+<p>Sofas • Tables • Chairs • Beds • Décor</p>
+</div>
+<video
+autoplay
+muted
+loop
+playsinline
+preload="auto"
+poster="img/hero-poster.png"
+class="hero-video"
+>
+
+<source src="assets/video/intro.mp4" type="video/mp4">
+
+</video>
+</section>
+
+<main class="container">
+  <h2 class="section-title">Nos produits</h2>
+
+  <div id="grid" class="grid">
+    <!-- Cards inserted by JS -->
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Détail Produit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">CasaStyle</div>
+  <a class="cart-link" href="index.html">← Retour</a>
+  <a class="cart-link" href="cart.html">Panier</a>
+</header>
+
+<main class="container">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start">
+    <img id="pImg" style="width:100%;max-width:520px;height:360px;border-radius:16px;object-fit:cover"/>
+    <div>
+      <h2 id="pName"></h2>
+      <p id="pDesc" style="color:#555"></p>
+      <div id="pPrice" style="font-weight:900;font-size:22px;margin:12px 0"></div>
+
+      <button id="addBtn" style="padding:12px 16px;border:none;border-radius:12px;background:#111;color:#fff;font-weight:800;cursor:pointer">
+        Ajouter au panier
+      </button>
+      <p id="msg" style="color:green;margin-top:10px;"></p>
+    </div>
+  </div>
+</main>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("name") || "";
+  const price = params.get("price") || "";
+  const img = params.get("img") || "";
+  const desc = params.get("desc") || "";
+
+  document.getElementById("pName").textContent = name;
+  document.getElementById("pDesc").textContent = desc;
+  document.getElementById("pPrice").textContent = price + " DH";
+  document.getElementById("pImg").src = img;
+
+  document.getElementById("addBtn").addEventListener("click", () => {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    cart.push({ name, price, img });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    document.getElementById("msg").textContent = "Ajouté au panier ✅";
+  });
+</script>
+
+</body>
+</html>

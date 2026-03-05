@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panier</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">CasaStyle</div>
+  <a class="cart-link" href="index.html">← Continuer</a>
+</header>
+
+<main class="container">
+  <h2>Mon panier</h2>
+  <div id="list"></div>
+  <h3 id="total"></h3>
+  <button id="clear" class="badge" style="border:none;cursor:pointer">Vider le panier</button>
+</main>
+
+<script>
+  const list = document.getElementById("list");
+  const totalEl = document.getElementById("total");
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  function render(){
+    list.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((p, i) => {
+      total += Number(p.price);
+
+      const row = document.createElement("div");
+      row.style.display = "flex";
+      row.style.gap = "12px";
+      row.style.alignItems = "center";
+      row.style.background = "#fff";
+      row.style.padding = "12px";
+      row.style.borderRadius = "12px";
+      row.style.marginBottom = "10px";
+
+      row.innerHTML = `
+        <img src="${p.img}" style="width:90px;height:70px;border-radius:10px;object-fit:cover">
+        <div style="flex:1">
+          <b>${p.name}</b><br>
+
+        </div>
+        <button data-i="${i}" style="border:none;background:#ff2d2d;color:#fff;padding:10px 12px;border-radius:10px;cursor:pointer">
+          Supprimer
+        </button>
+      `;
+
+      list.appendChild(row);
+    });
+
+    totalEl.textContent = "Total: CAD $" + total;
+  }
+
+  document.addEventListener("click", (e) => {
+    if(e.target.matches("button[data-i]")){
+      const i = Number(e.target.getAttribute("data-i"));
+      cart.splice(i, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      render();
+    }
+  });
+
+  document.getElementById("clear").addEventListener("click", () => {
+    localStorage.removeItem("cart");
+    location.reload();
+  });
+
+  render();
+</script>
+
+</body>
+</html>
